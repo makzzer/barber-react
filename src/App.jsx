@@ -4,12 +4,10 @@ import Blog from "./pages/Blog";
 
 const App = () => {
   return (
-    <>
-    <Home/>
-    <About/>
-    <Blog/>
-    </>
-  )
-}
+    <h1>app
+    
+    </h1>
+  );
+};
 
 export default App;
