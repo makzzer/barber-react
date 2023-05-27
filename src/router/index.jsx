@@ -11,10 +11,12 @@ import LayoutPublic from "../layouts/LayoutPublic";
 {
   /*errorElement le linkeo la pagina de NotFound*/
 }
-{/*Dentro de element: llamo siempre al layout publico para que lo que varie sea
+{
+  /*Dentro de element: llamo siempre al layout publico para que lo que varie sea
 el contenido de las paginas blog, about y home
 
-el index: true, es para indicar que "/" es la ruta que corresponde a HOME*/}
+el index: true, es para indicar que "/" es la ruta que corresponde a HOME*/
+}
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,8 +25,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
-      },
+        element: <Home />},
 
       {
         path: "/blog",
