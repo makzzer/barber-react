@@ -4,8 +4,6 @@ import Blog from "../pages/Blog";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
-import { children } from "react";
-
 {
   /*este es el router que importo */
 }
