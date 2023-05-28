@@ -4,6 +4,7 @@ import Blog from "../pages/Blog";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
+import {loaderBlog } from "../pages/Blog"
 {
   /*este es el router que importo */
 }
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+        loader: loaderBlog
       },
 
       {
