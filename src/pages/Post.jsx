@@ -10,6 +10,7 @@ const Post = () => {
         
         {postRecibido.id} {postRecibido.title}{" "}
       </h1>
+      <p>{postRecibido.body}</p>
       <Link className="btn btn-dark mb-2" to="/blog">
         volver
       </Link>
