@@ -4,7 +4,8 @@ import Blog from "../pages/Blog";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
-import {loaderBlog } from "../pages/Blog"
+import { loaderBlog } from "../pages/Blog";
+import Post, { loaderPosts } from "../pages/Post";
 {
   /*este es el router que importo */
 }
@@ -26,12 +27,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />},
+        element: <Home />,
+      },
 
       {
         path: "/blog",
         element: <Blog />,
-        loader: loaderBlog
+        loader: loaderBlog,
+      },
+
+      {
+        path: "/blog/:id",
+        element: <Post/>,
+        loader: loaderPosts,
       },
 
       {

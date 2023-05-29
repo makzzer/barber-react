@@ -2,12 +2,14 @@
 
 import { Link, useLoaderData } from "react-router-dom";
 
+import Post from "./Post";
+
 const Blog = () => {
   {
     /*Entre comillas le tengo que pasar si o si el mismo nombre del objeto que exporté en la funcion ASYNC de consulta a la API*/
   }
   const { datosTraidos } = useLoaderData();
-  console.log(datosTraidos);
+
 
   return (
     <>
@@ -15,6 +17,7 @@ const Blog = () => {
       <div>
         <ul className="list-group">
           {datosTraidos.length > 0 
+
           ? (datosTraidos.map((dato) => (
               <li key={dato.id} className="list-group-item">
                 <Link to={`/blog/${dato.id}`}>
@@ -22,7 +25,9 @@ const Blog = () => {
                 </Link>
               </li>
             ))
-          ) : (<li>datos no encontrados</li>)}
+          ) 
+          
+          : (<li>datos no encontrados</li>)}
         </ul>
       </div>
     </>
