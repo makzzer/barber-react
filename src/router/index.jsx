@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
 import { loaderBlog } from "../pages/Blog";
 import Post, { loaderPosts } from "../pages/Post";
+import Chino from "../pages/Chino";
 {
   /*este es el router que importo */
 }
@@ -46,6 +47,12 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+
+      {
+        path: "/chino",
+        element: <Chino />,
+      },
+
     ],
   },
 ]);
