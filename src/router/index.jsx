@@ -1,12 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import Turnos from "../pages/Turnos";
 import Home from "../pages/Home";
-import Blog from "../pages/Blog";
-import About from "../pages/About";
+import Ingresar from "../pages/Ingresar";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
-import { loaderBlog } from "../pages/Blog";
-import Post, { loaderPosts } from "../pages/Post";
-import Chino from "../pages/Chino";
+
+
 {
   /*este es el router que importo */
 }
@@ -32,27 +31,14 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/blog",
-        element: <Blog />,
-        loader: loaderBlog,
+        path: "/turnos",
+        element: <Turnos />,
       },
 
       {
-        path: "/blog/:id",
-        element: <Post/>,
-        loader: loaderPosts,
+        path: "/ingresar",
+        element: <Ingresar />,
       },
-
-      {
-        path: "/about",
-        element: <About />,
-      },
-
-      {
-        path: "/chino",
-        element: <Chino />,
-      },
-
     ],
   },
 ]);
