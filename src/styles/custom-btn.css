@@ -1,0 +1,4 @@
+.custom-btn:active,
+.custom-btn:focus {
+  box-shadow: none; /* Elimina la sombra al presionar o enfocar */
+}

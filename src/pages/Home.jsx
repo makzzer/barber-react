@@ -4,6 +4,7 @@ import SelectorFecha from "../components/calendar/SelectorFecha";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+//import "../styles/custom-btn.css"
 
 
 const Home = () => {
@@ -34,20 +35,21 @@ const Home = () => {
 
       <div className="container text-center text-uppercase">
         <div className="row d-flex gap-2 bg-body-tertiary">
-          <div className="d-flex flex-column m-2">
-            <button className="btn btn-outline-dark m-2 p-4 pb-10" onClick={openModal}>
+          <div className="d-flex flex-column m-2 uppercase">
+
+            <button className="btn btn-dark m-2 p-4 pb-10 text-uppercase" onClick={openModal}>
               Reservar Turno
             </button>
 
-            <NavLink className="btn btn-outline-dark m-2 p-4" to="#">
+            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
               Modificar Turno
             </NavLink>
 
-            <NavLink className="btn btn-outline-dark m-2 p-4" to="#">
+            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
               Cancelar Turno
             </NavLink>
 
-            <NavLink className="btn btn-outline-dark m-2 p-4" to="#">
+            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
               Ver mis Turnos
             </NavLink>
           </div>
