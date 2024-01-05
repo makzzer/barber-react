@@ -91,13 +91,6 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
               minHeight: "60vh", // Ajusta la altura mínima según sea necesario
               maxHeight: "96%", // Ajusta la altura máxima según sea necesario
               overflowY: "auto",
-              // Aplicar estilos específicos para pantallas pequeñas
-              "@media (maxWidth: 768px)": {
-                marginTop: "1%",
-                marginBottom: "1%",
-                minHeight: "70vh",
-                maxHeight: "98%",
-              },
             }}
           >
             <div className="modal-content">
@@ -111,47 +104,49 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
                 ></button>
               </div>
 
-              <div
-                className="modal-body "
-                style={{ textAlign: "center" }}
-              >
+              <div className="modal-body d-flex" style={{ textAlign: "center" }}>
                 {/* Acá arranca el contenido del body de la reserva de turnos */}
-                <div className="d-flex flex-column">
-                  <div>
-                    <h6>Seleccionar Día</h6>
-                  </div>
-                  <div>
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={handleDateChange}
-                      locale={es}
-                      dateFormat="MMMM d, yyyy"
-                      minDate={today}
-                      maxDate={twoWeeksLater}
-                    />
-                  </div>
 
-                  <br />
-
-                  <div>
-                    <h6>Seleccionar Horario</h6>
+                <div className="d-flex flex-row">
+                  {/* Columna de fecha */}
+                  <div className="d-flex flex-column ms-2">
+                    <div>
+                      <h6>Seleccionar Día</h6>
+                    </div>
+                    <div>
+                      <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        locale={es}
+                        dateFormat="MMMM d, yyyy"
+                        minDate={today}
+                        maxDate={twoWeeksLater}
+                      />
+                    </div>
                   </div>
 
-                  <div className=" ">
-                    <select
-                      value={selectedTime}
-                      onChange={handleTimeChange}
-                      style={{ marginTop: "10px" }}
-                    >
-                      <option value="" disabled>
-                        Horarios disponibles
-                      </option>
-                      {timeOptions.map((time, index) => (
-                        <option key={index} value={time}>
-                          {time}
-                        </option>
-                      ))}
-                    </select>
+                  {/* Espaciador vertical para alinear los elementos */}
+                  <div style={{ marginTop: "10px" }}></div>
+
+                  {/* Columna de hora */}
+                  <div className="d-flex flex-column ms-4">
+                    <div>
+                      <h6>Disponibilidad</h6>
+                    </div>
+
+                    <div className="">
+                      <select
+                        value={selectedTime}
+                        onChange={handleTimeChange}
+                        style={{ marginTop: "5px" }}
+                      >
+                        {timeOptions.map((time, index) => (
+                          <option key={index} value={time}>
+                            {time}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
