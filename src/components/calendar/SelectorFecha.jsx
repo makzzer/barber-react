@@ -28,8 +28,27 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
   };
 
   const timeOptions = [
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
-    "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "12:00",
+    "12:30",
+    "13:00",
+    "13:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00",
+    "17:30",
+    "18:00",
+    "18:30",
+    "19:00",
   ];
 
   useEffect(() => {
@@ -57,50 +76,99 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
       )}
 
       {isOpen ? (
-        <div className="modal show" tabIndex="-1" role="dialog" style={{ display: "block" }}>
+        <div
+          className="modal show"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: "block" }}
+        >
           <div
             className="modal-dialog"
             role="document"
             style={{
-              marginTop: "10%",
-              maxHeight: "80%",
+              marginTop: "2%", // Ajusta el margen superior según sea necesario
+              marginBottom: "2%", // Ajusta el margen inferior según sea necesario
+              minHeight: "60vh", // Ajusta la altura mínima según sea necesario
+              maxHeight: "96%", // Ajusta la altura máxima según sea necesario
               overflowY: "auto",
               // Aplicar estilos específicos para pantallas pequeñas
-              "@media (max-width: 768px)": {
-                marginTop: "5%",
-                maxHeight: "90%",
+              "@media (maxWidth: 768px)": {
+                marginTop: "1%",
+                marginBottom: "1%",
+                minHeight: "70vh",
+                maxHeight: "98%",
               },
             }}
           >
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Reservar turno</h5>
-                <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={onClose}
+                  aria-label="Close"
+                ></button>
               </div>
-              <div className="modal-body" style={{ textAlign: "center" }}>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={handleDateChange}
-                  locale={es}
-                  dateFormat="MMMM d, yyyy"
-                  minDate={today}
-                  maxDate={twoWeeksLater}
-                />
-                <br />
-                <select value={selectedTime} onChange={handleTimeChange} style={{ marginTop: "10px" }}>
-                  <option value="" disabled>Horarios disponibles</option>
-                  {timeOptions.map((time, index) => (
-                    <option key={index} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
+
+              <div
+                className="modal-body "
+                style={{ textAlign: "center" }}
+              >
+                {/* Acá arranca el contenido del body de la reserva de turnos */}
+                <div className="d-flex flex-column">
+                  <div>
+                    <h6>Seleccionar Día</h6>
+                  </div>
+                  <div>
+                    <DatePicker
+                      selected={selectedDate}
+                      onChange={handleDateChange}
+                      locale={es}
+                      dateFormat="MMMM d, yyyy"
+                      minDate={today}
+                      maxDate={twoWeeksLater}
+                    />
+                  </div>
+
+                  <br />
+
+                  <div>
+                    <h6>Seleccionar Horario</h6>
+                  </div>
+
+                  <div className=" ">
+                    <select
+                      value={selectedTime}
+                      onChange={handleTimeChange}
+                      style={{ marginTop: "10px" }}
+                    >
+                      <option value="" disabled>
+                        Horarios disponibles
+                      </option>
+                      {timeOptions.map((time, index) => (
+                        <option key={index} value={time}>
+                          {time}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
               </div>
+
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={handleSave}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSave}
+                >
                   Guardar
                 </button>
-                <button type="button" className="btn btn-secondary" onClick={onClose}>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={onClose}
+                >
                   Cerrar
                 </button>
               </div>
