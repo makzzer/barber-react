@@ -12,6 +12,8 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
 
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedTime, setSelectedTime] = useState("");
+  const [selectedBarbero, setBarbero] = useState("");
+  const [selectedServicio, setServicio] = useState("");
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -19,6 +21,14 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
 
   const handleTimeChange = (e) => {
     setSelectedTime(e.target.value);
+  };
+
+  const handleBarberoChange = (e) => {
+    setBarbero(e.target.value);
+  };
+
+  const handleServicioChange = (e) => {
+    setServicio(e.target.value);
   };
 
   const handleSave = () => {
@@ -50,6 +60,10 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
     "18:30",
     "19:00",
   ];
+
+  const barberos = ["Dani", "Cris", "Barbero X"];
+
+  const servicios = ["Corte", "Corte y barba"];
 
   useEffect(() => {
     if (isOpen) {
@@ -104,17 +118,76 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
                 ></button>
               </div>
 
-              <div className="modal-body d-flex" style={{ textAlign: "center" }}>
+              <div
+                className="modal-body d-flex flex-column"
+                style={{ textAlign: "center" }}
+              >
                 {/* Acá arranca el contenido del body de la reserva de turnos */}
 
                 <div className="d-flex flex-row">
+                  {/* Espaciador vertical para alinear los elementos */}
+                  <div style={{ marginTop: "10px" }}></div>
+
+                  {/* Espaciador vertical para alinear los elementos */}
+                  <div style={{ marginTop: "10px" }}></div>
+
+                  {/* Columna de Servicio */}
+
+                  <div className="d-flex flex-row">
+                    {/* select de barbero */}
+                    <div className="d-flex flex-column ms-2">
+                      <div>
+                        <h6>Seleccione Barbero</h6>
+                      </div>
+
+                      <div className="">
+                        <select
+                          value={selectedBarbero}
+                          onChange={handleBarberoChange}
+                          style={{ marginTop: "5px" }}
+                        >
+                          {barberos.map((barbero, index) => (
+                            <option key={index} value={barbero}>
+                              {barbero}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="d-flex flex-column ms-4">
+                      <div>
+                        <h6>Seleccione servicio</h6>
+                      </div>
+
+                      <div className="">
+                        <select
+                          value={selectedServicio}
+                          onChange={handleServicioChange}
+                          style={{ marginTop: "5px" }}
+                        >
+                          {servicios.map((servicio, index) => (
+                            <option key={index} value={servicio}>
+                              {servicio}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr className="mt-4 mb-4"></hr>
+
+                <div className="d-flex flex-row">
                   {/* Columna de fecha */}
-                  <div className="d-flex flex-column ms-2">
+                  <div className="d-flex flex-column">
                     <div>
-                      <h6>Seleccionar Día</h6>
+                      <h6 className="">Seleccione Día</h6>
                     </div>
                     <div>
                       <DatePicker
+                        className="ms-2"
                         selected={selectedDate}
                         onChange={handleDateChange}
                         locale={es}
