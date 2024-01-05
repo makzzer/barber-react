@@ -41,16 +41,9 @@ const Home = () => {
               Reservar Turno
             </button>
 
-            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
-              Modificar Turno
-            </NavLink>
 
-            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
-              Cancelar Turno
-            </NavLink>
-
-            <NavLink className="btn btn-outline-dark  m-2 p-4 pb-10" to="#">
-              Ver mis Turnos
+            <NavLink className="btn btn-secondary  m-2 p-4 pb-10" to="#">
+              Gestionar Turnos
             </NavLink>
           </div>
         </div>

@@ -86,7 +86,7 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
             className="modal-dialog"
             role="document"
             style={{
-              marginTop: "2%", // Ajusta el margen superior según sea necesario
+              marginTop: "20%", // Ajusta el margen superior según sea necesario
               marginBottom: "2%", // Ajusta el margen inferior según sea necesario
               minHeight: "60vh", // Ajusta la altura mínima según sea necesario
               maxHeight: "96%", // Ajusta la altura máxima según sea necesario
