@@ -43,7 +43,7 @@ const Home = () => {
 
 
             <NavLink className="btn btn-secondary  m-2 p-4 pb-10" to="#">
-              Gestionar Turnos
+              Gestionar mis Turnos
             </NavLink>
           </div>
         </div>
