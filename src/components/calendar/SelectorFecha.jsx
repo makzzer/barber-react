@@ -187,7 +187,7 @@ const SelectorFecha = ({ isOpen, onClose, onDateSelect }) => {
                     </div>
                     <div>
                       <DatePicker
-                        className="ms-2"
+                        className="ms-0"
                         selected={selectedDate}
                         onChange={handleDateChange}
                         locale={es}
