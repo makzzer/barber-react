@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
 
 
+
 {
   /*este es el router que importo */
 }
@@ -32,13 +33,16 @@ export const router = createBrowserRouter([
 
       {
         path: "/turnos",
-        element: <Turnos />,
+        element: <Turnos/>,
       },
 
       {
         path: "/ingresar",
         element: <Ingresar />,
       },
+
+
+
     ],
   },
 ]);

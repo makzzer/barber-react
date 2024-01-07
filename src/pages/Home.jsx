@@ -42,7 +42,7 @@ const Home = () => {
             </button>
 
 
-            <NavLink className="btn btn-secondary  m-2 p-4 pb-10" to="#">
+            <NavLink className="btn btn-secondary  m-2 p-4 pb-10" to="/turnos">
               Mis Turnos
             </NavLink>
           </div>

@@ -1,0 +1,13 @@
+/* Agrega estos estilos a tu archivo de estilos */
+.custom-card {
+  background-color: #f8f9fa; /* Puedes ajustar este color a tu preferencia */
+  color: #343a40; /* Puedes ajustar este color a tu preferencia */
+}
+
+
+/* ListaTurnos.css */
+.custom-container {
+  background-color: #f8f9fa; /* Color gris para el fondo del contenedor */
+  padding: 10px; /* Ajusta según sea necesario */
+  border-radius: 5px; /* Ajusta según sea necesario */
+}
