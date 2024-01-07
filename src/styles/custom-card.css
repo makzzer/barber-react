@@ -11,3 +11,11 @@
   padding: 10px; /* Ajusta según sea necesario */
   border-radius: 5px; /* Ajusta según sea necesario */
 }
+
+
+/* ListaTurnos.css */
+.custom-container-boton {
+  background-color: #f8f9fa; /* Color gris para el fondo del contenedor */
+  padding: 8px; /* Ajusta según sea necesario */
+  border-radius: 5px; /* Ajusta según sea necesario */
+}
