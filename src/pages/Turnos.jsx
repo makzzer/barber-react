@@ -13,7 +13,7 @@ const Turnos = () => {
 
 
             <NavLink className="btn btn-danger  m-2 p-4 pb-10" to="/">
-              Volver
+              VOLVER
             </NavLink>
           </div>
         </div>
