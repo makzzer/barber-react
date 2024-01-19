@@ -68,7 +68,7 @@ const SignUp = () => {
             className="btn btn-dark w-100"
             type="submit"
           >
-            Registrarse
+            Crear Cuenta
           </button>
         </div>
 

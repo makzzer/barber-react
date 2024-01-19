@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Ingresar from "../pages/Ingresar";
 import NotFound from "../pages/NotFound";
 import LayoutPublic from "../layouts/LayoutPublic";
+import TablaTurnos from "../components/calendar/TablaTurnos";
 
 
 
@@ -39,6 +40,11 @@ export const router = createBrowserRouter([
       {
         path: "/ingresar",
         element: <Ingresar />,
+      },
+
+      {
+        path: "/reservarturnos2",
+        element: <TablaTurnos />,
       },
 
 
