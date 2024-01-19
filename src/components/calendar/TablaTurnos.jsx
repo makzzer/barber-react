@@ -47,6 +47,8 @@ const TablaTurnos = () => {
 
   return (
     <div className="container text-center mt-4 mb-4">
+      <h1>Reservar Turno</h1>
+      <hr />
       <div className="d-flex justify-content-between mb-4">
         {/* Filtro de barberos (corregido) */}
         <div>
@@ -81,6 +83,7 @@ const TablaTurnos = () => {
         </div>
       </div>
 
+      <hr />
       <h3>Seleccione horario</h3>
       <div className="list-group">
         {horarios.map((horario, index) => (
