@@ -95,21 +95,16 @@ const TablaTurnos = () => {
             {horario}
           </button>
         ))}
-
-
-        
       </div>
 
-      <div className="footer row  d-flex mx-4 align-items-end gap-4 mx-auto">
-
-        <button type="button" className="mt-4 btn btn-danger">
-          Confirmar reserva
+      <div className="footer row d-flex mx-4 align-items-end mx-auto uppercase">
+        <button type="button" className="mt-4 btn btn-danger mt-2 p-4 pb-10">
+          CONFIRMAR RESERVA
         </button>
-        <NavLink  className="btn btn-secondary" to="/">
-          Volver
+        <NavLink className="btn btn-dark mt-2 p-4 pb-10" to="/">
+          VOLVER
         </NavLink>
       </div>
-      
     </div>
   );
 };

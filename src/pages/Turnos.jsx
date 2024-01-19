@@ -12,7 +12,7 @@ const Turnos = () => {
           <div className="d-flex flex-column m-2 uppercase">
 
 
-            <NavLink className="btn btn-danger  m-2 p-4 pb-10" to="/">
+            <NavLink className="btn btn-dark  m-2 p-4 pb-10" to="/">
               VOLVER
             </NavLink>
           </div>
