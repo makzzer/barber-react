@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Turnos = () => {
   return (
     <div className="container text-center mt-4 mb-4">
-      <h1 className="mb-12">MIS TURNOS</h1>
+      <h1 className="mb-12">Mis Turnos</h1>
       <ListaTurnos />
 
       <div className="footer row d-flex mx-4 align-items-end mx-auto uppercase">
