@@ -50,7 +50,7 @@ const TablaTurnos = () => {
       <div className="d-flex justify-content-between mb-4">
         {/* Filtro de barberos (corregido) */}
         <div>
-          <label className="mb-2 fw-semibold">Barbero:</label>
+          <label className="mb-2 fw-semibold mx-2">Barbero:</label>
           <select
             value={barberoFiltrado}
             onChange={handleBarberoChange}
@@ -66,7 +66,7 @@ const TablaTurnos = () => {
 
         {/* Filtro de servicios */}
         <div>
-          <label className="mb-2 fw-semibold">Servicio:</label>
+          <label className="mb-2 fw-semibold mx-2">Servicio:</label>
           <select
             onChange={handleServicioChange}
             value={servicioFiltrado}
