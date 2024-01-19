@@ -66,7 +66,7 @@ const TablaTurnos = () => {
 
         {/* Filtro de servicios */}
         <div>
-          <label className="mb-2 fw-semibold">Seleccione Servicio:</label>
+          <label className="mb-2 fw-semibold">Servicio:</label>
           <select
             onChange={handleServicioChange}
             value={servicioFiltrado}
