@@ -65,7 +65,7 @@ const SignUp = () => {
         <div className="mb-3">
           <button
             onClick={handleSignUp}
-            className="btn btn-secondary w-100"
+            className="btn btn-dark w-100"
             type="submit"
           >
             Registrarse

@@ -26,7 +26,7 @@ const SignIn = () => {
         <div className="mb-3">
           <button
             onClick={handleSignIn}
-            className="btn btn-secondary w-100"
+            className="btn btn-dark w-100"
             type="submit"
           >
             Ingresar
