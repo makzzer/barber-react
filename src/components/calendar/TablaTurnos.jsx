@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import Axios from "axios";
+import SelectorFecha from "./SelectorFecha";
 
 const TablaTurnos = () => {
   const horarios = [
@@ -26,12 +28,18 @@ const TablaTurnos = () => {
     "19:00",
   ];
 
+  var barberosApi = "http://localhost:1337/api/barberos";
+  var serviciosApi = "http://localhost:1337/api/productos";
+  var diayhorariosApi = "http://localhost:1337/api/dia-turnos?populate=*"
+  var horariosApi = "http://localhost:1337/api/horarios"
+
+  const [barberos, setBarbero] = useState([]);
+  const [servicios, setServicio] = useState([]);
+  const [horarios2,setHorario2] = useState([]);
+
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(0);
   const [barberoFiltrado, setBarberoFiltrado] = useState("");
   const [servicioFiltrado, setServicioFiltrado] = useState("");
-
-  const barberos = ["Dani", "Cris", "Mariano"];
-  const servicios = ["Corte", "Corte y barba", "Barba"];
 
   const handleHorarioClick = (index) => {
     setHorarioSeleccionado(index);
@@ -44,6 +52,41 @@ const TablaTurnos = () => {
   const handleServicioChange = (e) => {
     setServicioFiltrado(e.target.value);
   };
+
+  //llamar a la api de barberos para que traiga los disponibles
+
+  useEffect(() => {
+    Axios.get(barberosApi)
+      .then((response) => {
+        const barberosNombres = response.data.data.map(
+          (barbero) => barbero.attributes.nombre
+        );
+        setBarbero(barberosNombres);
+      })
+      .catch((error) => {
+        console.log("error al obtener barberos", error);
+      });
+  }, []);
+
+
+
+  //llamar a la pi de servicios para que traiga los nombres de los servicios disponibles
+  useEffect(() => {
+    Axios.get(serviciosApi)
+      .then((response) => {
+        const serviciosNombre = response.data.data.map(
+          (servicio) => servicio.attributes.nombre
+        );
+        setServicio(serviciosNombre);
+      })
+      .catch((error) => {
+        console.log("error al obtener los servicios", error);
+      });
+  }, []);
+
+
+  //llamar a la api que me traiga los horarios
+
 
   return (
     <div className="container text-center mt-4 mb-4">
@@ -84,7 +127,13 @@ const TablaTurnos = () => {
       </div>
 
       <hr />
-      <h3>Seleccione horario</h3>
+      <h3>Seleccione fecha</h3>
+
+      <SelectorFecha/>
+      <hr/>
+
+
+
       <div className="list-group">
         {horarios.map((horario, index) => (
           <button
