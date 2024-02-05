@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "../../../node_modules/react-datepicker/dist/react-datepicker.css";
 import es from "../../../node_modules/date-fns/locale/es";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 
 const SelectorFecha = ({ onDateSelect }) => {
   const today = new Date();
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(
+    today.getDay() === 0 // Si hoy es domingo
+      ? addDays(today, 2) // Seleccionar el próximo martes
+      : today.getDay() === 1 // Si hoy es lunes
+      ? addDays(today, 1) // Seleccionar el próximo martes
+      : today
+  );
+  // ..
   const [availableSlots, setAvailableSlots] = useState([]);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
 
@@ -156,7 +163,9 @@ const SelectorFecha = ({ onDateSelect }) => {
                     key={subIndex}
                     type="button"
                     className={`list-group-item list-group-item-action ${
-                      index === horarioSeleccionado && subIndex === 0 ? "list-group-item-secondary" : ""
+                      index === horarioSeleccionado && subIndex === 0
+                        ? "list-group-item-secondary"
+                        : ""
                     }`}
                     onClick={() => handleHorarioClick(index)}
                   >
