@@ -23,12 +23,6 @@ const SelectorFecha = ({ onDateSelect }) => {
 
   var apiTurnos = "http://localhost:1337/api/dia-turnos";
 
-  // Imprimir fecha seleccionada en consola
-  const handleCheckAvailabilityPrint = () => {
-    const formattedDate = format(selectedDate, "yyyy-MM-dd");
-    console.log("Fecha seleccionada:", formattedDate);
-  };
-
   // Agregar día mediante POST y crear lista de horarios
   const handleCheckAvailability = async () => {
     try {
@@ -78,6 +72,9 @@ const SelectorFecha = ({ onDateSelect }) => {
           existingData.error
         );
       }
+      
+      // Actualizar el listado después de la creación o verificación de la fecha
+      fetchDatesAndSlots(selectedDate);
     } catch (error) {
       console.error("Error al consultar la disponibilidad:", error);
     }
