@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "../../../node_modules/react-datepicker/dist/react-datepicker.css";
 import es from "../../../node_modules/date-fns/locale/es";
@@ -28,7 +28,7 @@ const SelectorFecha = ({ onDateSelect }) => {
     console.log("Fecha seleccionada:", formattedDate);
   };
 
-  // Agregar día mediante POST
+  // Agregar día mediante POST y crear lista de horarios
   const handleCheckAvailability = async () => {
     try {
       const formattedDate = format(selectedDate, "yyyy-MM-dd");
@@ -46,6 +46,8 @@ const SelectorFecha = ({ onDateSelect }) => {
           return;
         }
 
+        const timeSlots = createTimeSlots();
+
         const response = await fetch(apiTurnos, {
           method: "POST",
           headers: {
@@ -54,6 +56,7 @@ const SelectorFecha = ({ onDateSelect }) => {
           body: JSON.stringify({
             data: {
               diaTurno: formattedDate,
+              horarios: timeSlots,
             },
           }),
         });
@@ -64,7 +67,7 @@ const SelectorFecha = ({ onDateSelect }) => {
           console.log("Fecha creada:", formattedDate);
           setAvailableSlots((prevSlots) => [
             ...prevSlots,
-            { diaTurno: formattedDate },
+            { diaTurno: formattedDate, horarios: timeSlots },
           ]);
         } else {
           console.error("Error al crear la fecha:", data.error);
@@ -79,6 +82,42 @@ const SelectorFecha = ({ onDateSelect }) => {
       console.error("Error al consultar la disponibilidad:", error);
     }
   };
+
+  // Crear lista de horarios con estado inicial de disponible en true
+  const createTimeSlots = () => {
+    const horarios = [
+      "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+      "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
+      "17:00", "17:30", "18:00", "18:30", "19:00",
+    ];
+
+    return horarios.map((hora) => ({ hora, disponible: true }));
+  };
+
+  useEffect(() => {
+    // Cargar fechas y horarios disponibles al montar el componente
+    const fetchDatesAndSlots = async () => {
+      try {
+        const response = await fetch(apiTurnos);
+        const data = await response.json();
+
+        if (response.ok) {
+          const slotsData = data.data.map((item) => ({
+            diaTurno: item.attributes.diaTurno,
+            horarios: createTimeSlots(),
+          }));
+
+          setAvailableSlots(slotsData);
+        } else {
+          console.error("Error al obtener las fechas existentes:", data.error);
+        }
+      } catch (error) {
+        console.error("Error al consultar la disponibilidad:", error);
+      }
+    };
+
+    fetchDatesAndSlots();
+  }, []);
 
   return (
     <div className="selector-fecha">
@@ -109,8 +148,15 @@ const SelectorFecha = ({ onDateSelect }) => {
           <ul>
             {availableSlots.map((slot) => (
               <li key={slot.diaTurno}>
-                {slot.diaTurno} -{" "}
-                {slot.disponible ? "Disponible" : "No disponible"}
+                {slot.diaTurno}
+                <ul>
+                  {slot.horarios.map((horaSlot) => (
+                    <li key={horaSlot.hora}>
+                      {horaSlot.hora} -{" "}
+                      {horaSlot.disponible ? "Disponible" : "No disponible"}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>
