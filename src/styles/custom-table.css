@@ -1,0 +1,24 @@
+/* Estilos CSS en tu archivo de estilos o en línea */
+.list-group-item.available {
+  background-color: #8FDB91; /* Verde más sutil para disponibles */
+  color: #fff; /* Texto en blanco para contrastar */
+}
+
+
+.list-group-item.unavailable {
+  background-color: #FFB4B4; /* Rojo más claro para no disponibles */
+  color: #fff; /* Texto en blanco para contrastar */
+}
+
+
+.list-group-item.selected-available {
+  background-color: #28a745; /* Verde más claro para seleccionado y disponible */
+  color: #fff; /* Texto en blanco para contrastar */
+}
+
+.list-group-item.selected-unavailable {
+  background-color: #d9534f; /* Rojo más claro para seleccionado y no disponible */
+  color: #fff; /* Texto en blanco para contrastar */
+}
+
+
