@@ -12,6 +12,7 @@ const SelectorFecha = ({ onDateSelect }) => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setAvailableSlots([]);
+    fetchDatesAndSlots(date);
   };
 
   // Función para deshabilitar domingos y lunes
@@ -43,34 +44,33 @@ const SelectorFecha = ({ onDateSelect }) => {
 
         if (dateExists) {
           console.log("Fecha ya existe:", formattedDate);
-          return;
-        }
-
-        const timeSlots = createTimeSlots();
-
-        const response = await fetch(apiTurnos, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            data: {
-              diaTurno: formattedDate,
-              horarios: timeSlots,
-            },
-          }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          console.log("Fecha creada:", formattedDate);
-          setAvailableSlots((prevSlots) => [
-            ...prevSlots,
-            { diaTurno: formattedDate, horarios: timeSlots },
-          ]);
         } else {
-          console.error("Error al crear la fecha:", data.error);
+          const timeSlots = createTimeSlots();
+
+          const response = await fetch(apiTurnos, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data: {
+                diaTurno: formattedDate,
+                horarios: timeSlots,
+              },
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            console.log("Fecha creada:", formattedDate);
+            setAvailableSlots([
+              { diaTurno: formattedDate, horarios: timeSlots },
+              ...availableSlots,
+            ]);
+          } else {
+            console.error("Error al crear la fecha:", data.error);
+          }
         }
       } else {
         console.error(
@@ -94,30 +94,30 @@ const SelectorFecha = ({ onDateSelect }) => {
     return horarios.map((hora) => ({ hora, disponible: true }));
   };
 
-  useEffect(() => {
-    // Cargar fechas y horarios disponibles al montar el componente
-    const fetchDatesAndSlots = async () => {
-      try {
-        const response = await fetch(apiTurnos);
-        const data = await response.json();
+  // Obtener fechas y horarios disponibles
+  const fetchDatesAndSlots = async (date) => {
+    try {
+      const formattedDate = format(date, "yyyy-MM-dd");
 
-        if (response.ok) {
-          const slotsData = data.data.map((item) => ({
+      const response = await fetch(apiTurnos);
+      const data = await response.json();
+
+      if (response.ok) {
+        const slotsData = data.data
+          .filter((item) => item.attributes.diaTurno === formattedDate)
+          .map((item) => ({
             diaTurno: item.attributes.diaTurno,
-            horarios: createTimeSlots(),
+            horarios: item.attributes.horarios || createTimeSlots(),
           }));
 
-          setAvailableSlots(slotsData);
-        } else {
-          console.error("Error al obtener las fechas existentes:", data.error);
-        }
-      } catch (error) {
-        console.error("Error al consultar la disponibilidad:", error);
+        setAvailableSlots(slotsData);
+      } else {
+        console.error("Error al obtener las fechas existentes:", data.error);
       }
-    };
-
-    fetchDatesAndSlots();
-  }, []);
+    } catch (error) {
+      console.error("Error al consultar la disponibilidad:", error);
+    }
+  };
 
   return (
     <div className="selector-fecha">
