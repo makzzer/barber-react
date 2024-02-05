@@ -6,7 +6,7 @@
 
 
 .list-group-item.unavailable {
-  background-color: #FFB4B4; /* Rojo más claro para no disponibles */
+  background-color: #d9534f; /* Rojo más claro para no disponibles */
   color: #fff; /* Texto en blanco para contrastar */
 }
 

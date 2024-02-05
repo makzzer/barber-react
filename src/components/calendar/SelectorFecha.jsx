@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import "../../../node_modules/react-datepicker/dist/react-datepicker.css";
-import es from "../../../node_modules/date-fns/locale/es";
+import "react-datepicker/dist/react-datepicker.css";
+import es from "date-fns/locale/es";
 import { format, addDays } from "date-fns";
 import "../../styles/custom-table.css";
 
@@ -16,11 +16,17 @@ const SelectorFecha = ({ onDateSelect }) => {
   );
   const [availableSlots, setAvailableSlots] = useState([]);
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  useEffect(() => {
+    // Cuando se carga el componente, obtener los horarios disponibles del día seleccionado
+    fetchDatesAndSlots(selectedDate);
+  }, [selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setAvailableSlots([]);
-    fetchDatesAndSlots(date);
+    // No es necesario llamar fetchDatesAndSlots aquí porque useEffect ya lo hace al cambiar selectedDate
   };
 
   const filterWeekdays = (date) => {
@@ -28,7 +34,7 @@ const SelectorFecha = ({ onDateSelect }) => {
     return day !== 0 && day !== 1;
   };
 
-  var apiTurnos = "http://localhost:1337/api/dia-turnos";
+  const apiTurnos = "http://localhost:1337/api/dia-turnos";
 
   const handleCheckAvailability = async () => {
     try {
@@ -138,12 +144,9 @@ const SelectorFecha = ({ onDateSelect }) => {
     }
   };
 
-  const [selectedSlot, setSelectedSlot] = useState(null);
-
   const handleHorarioClick = (index, subIndex) => {
     setSelectedSlot({ diaIndex: index, horarioIndex: subIndex });
   };
-  
 
   return (
     <div className="selector-fecha">
@@ -175,30 +178,25 @@ const SelectorFecha = ({ onDateSelect }) => {
             {availableSlots.map((slot, index) => (
               <div key={index}>
                 {slot.horarios.map((horaSlot, subIndex) => (
-                 
-                 
-<button
-  key={subIndex}
-  type="button"
-  className={`list-group-item list-group-item-action ${
-    selectedSlot &&
-    index === selectedSlot.diaIndex &&
-    subIndex === selectedSlot.horarioIndex
-      ? horaSlot.disponible
-        ? "selected-available"
-        : "selected-unavailable"
-      : horaSlot.disponible
-      ? "available"
-      : "unavailable"
-  }`}
-  onClick={() => handleHorarioClick(index, subIndex)}
->
-  {horaSlot.hora} -{" "}
-  {horaSlot.disponible ? "Disponible" : "No disponible"}
-</button>
-
-
-
+                  <button
+                    key={subIndex}
+                    type="button"
+                    className={`list-group-item list-group-item-action ${
+                      selectedSlot &&
+                      index === selectedSlot.diaIndex &&
+                      subIndex === selectedSlot.horarioIndex
+                        ? horaSlot.disponible
+                          ? "selected-available"
+                          : "selected-unavailable"
+                        : horaSlot.disponible
+                        ? "available"
+                        : "unavailable"
+                    }`}
+                    onClick={() => handleHorarioClick(index, subIndex)}
+                  >
+                    {horaSlot.hora} -{" "}
+                    {horaSlot.disponible ? "Disponible" : "No disponible"}
+                  </button>
                 ))}
               </div>
             ))}
