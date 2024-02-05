@@ -148,18 +148,25 @@ const SelectorFecha = ({ onDateSelect }) => {
     setSelectedSlot({ diaIndex: index, horarioIndex: subIndex });
   };
 
+  const CustomDateInput = React.forwardRef(({ value, onClick }, ref) => (
+    <button className="custom-date-input" onClick={onClick} ref={ref}>
+      <span>{format(value, "EEEE, MMMM d, yyyy", { locale: es })}</span>
+    </button>
+  ));
+
   return (
     <div className="selector-fecha">
       <div>
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          locale={es}
-          dateFormat="MMMM d, yyyy"
-          minDate={today}
-          className="text-center mb-1"
-          filterDate={filterWeekdays}
-        />
+      <DatePicker
+  selected={selectedDate}
+  onChange={handleDateChange}
+  locale={es}
+  dateFormat="MMMM d, yyyy"
+  minDate={today}
+  className="text-center mb-1"
+  filterDate={filterWeekdays}
+  customInput={<CustomDateInput />}
+/>
       </div>
       <div className="mt-2">
         <button
