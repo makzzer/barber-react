@@ -157,16 +157,16 @@ const SelectorFecha = ({ onDateSelect }) => {
   return (
     <div className="selector-fecha">
       <div>
-      <DatePicker
-  selected={selectedDate}
-  onChange={handleDateChange}
-  locale={es}
-  dateFormat="MMMM d, yyyy"
-  minDate={today}
-  className="text-center mb-1"
-  filterDate={filterWeekdays}
-  customInput={<CustomDateInput />}
-/>
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          locale={es}
+          dateFormat="MMMM d, yyyy"
+          minDate={today}
+          className="text-center mb-1"
+          filterDate={filterWeekdays}
+          customInput={<CustomDateInput />}
+        />
       </div>
       <div className="mt-2">
         <button
@@ -201,8 +201,12 @@ const SelectorFecha = ({ onDateSelect }) => {
                     }`}
                     onClick={() => handleHorarioClick(index, subIndex)}
                   >
-                    {horaSlot.hora} -{" "}
-                    {horaSlot.disponible ? "Disponible" : "No disponible"}
+                    <div className="d-flex justify-content-center gap-2">
+                      <div>{horaSlot.hora}</div>
+                      <div>-</div>
+                      <div>{horaSlot.disponible ? "Disponible" : "No disponible"}</div>
+                                            
+                    </div>
                   </button>
                 ))}
               </div>
