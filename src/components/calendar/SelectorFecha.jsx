@@ -40,7 +40,6 @@ const handleCheckAvailability = async () => {
   try {
     const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
-    // Verificar si la fecha ya existe
     const existingResponse = await fetch(apiTurnos);
     const existingData = await existingResponse.json();
 
@@ -51,11 +50,9 @@ const handleCheckAvailability = async () => {
 
       if (dateExists) {
         console.log("Fecha ya existe:", formattedDate);
-        // Puedes manejar esto según tus necesidades, como mostrar un mensaje de error al usuario.
         return;
       }
 
-      // Si la fecha no existe, realizar la solicitud POST
       const response = await fetch(apiTurnos, {
         method: "POST",
         headers: {
@@ -72,23 +69,24 @@ const handleCheckAvailability = async () => {
 
       if (response.ok) {
         console.log("Fecha creada:", formattedDate);
-        // Actualizar la lista local (si es necesario)
         setAvailableSlots((prevSlots) => [
           ...prevSlots,
           { diaTurno: formattedDate },
         ]);
       } else {
         console.error("Error al crear la fecha:", data.error);
-        // Puedes manejar esto según tus necesidades, como mostrar un mensaje de error al usuario.
       }
     } else {
-      console.error("Error al obtener las fechas existentes:", existingData.error);
-      // Puedes manejar esto según tus necesidades, como mostrar un mensaje de error al usuario.
+      console.error(
+        "Error al obtener las fechas existentes:",
+        existingData.error
+      );
     }
   } catch (error) {
     console.error("Error al consultar la disponibilidad:", error);
   }
 };
+
 
 
 
