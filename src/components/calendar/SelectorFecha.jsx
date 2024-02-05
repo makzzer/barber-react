@@ -8,6 +8,7 @@ const SelectorFecha = ({ onDateSelect }) => {
   const today = new Date();
   const [selectedDate, setSelectedDate] = useState(today);
   const [availableSlots, setAvailableSlots] = useState([]);
+  const [horarioSeleccionado, setHorarioSeleccionado] = useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -72,7 +73,7 @@ const SelectorFecha = ({ onDateSelect }) => {
           existingData.error
         );
       }
-      
+
       // Actualizar el listado después de la creación o verificación de la fecha
       fetchDatesAndSlots(selectedDate);
     } catch (error) {
@@ -116,6 +117,11 @@ const SelectorFecha = ({ onDateSelect }) => {
     }
   };
 
+  const handleHorarioClick = (index) => {
+    setHorarioSeleccionado(index);
+    // Realizar acciones adicionales según sea necesario al hacer clic en un horario
+  };
+
   return (
     <div className="selector-fecha">
       <div>
@@ -142,21 +148,25 @@ const SelectorFecha = ({ onDateSelect }) => {
       {availableSlots.length > 0 && (
         <div className="mt-3">
           <h4>Horarios disponibles:</h4>
-          <ul>
-            {availableSlots.map((slot) => (
-              <li key={slot.diaTurno}>
-                {slot.diaTurno}
-                <ul>
-                  {slot.horarios.map((horaSlot) => (
-                    <li key={horaSlot.hora}>
-                      {horaSlot.hora} -{" "}
-                      {horaSlot.disponible ? "Disponible" : "No disponible"}
-                    </li>
-                  ))}
-                </ul>
-              </li>
+          <div className="list-group">
+            {availableSlots.map((slot, index) => (
+              <div key={index}>
+                {slot.horarios.map((horaSlot, subIndex) => (
+                  <button
+                    key={subIndex}
+                    type="button"
+                    className={`list-group-item list-group-item-action ${
+                      index === horarioSeleccionado && subIndex === 0 ? "list-group-item-secondary" : ""
+                    }`}
+                    onClick={() => handleHorarioClick(index)}
+                  >
+                    {horaSlot.hora} -{" "}
+                    {horaSlot.disponible ? "Disponible" : "No disponible"}
+                  </button>
+                ))}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>

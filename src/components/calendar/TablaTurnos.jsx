@@ -30,12 +30,12 @@ const TablaTurnos = () => {
 
   var barberosApi = "http://localhost:1337/api/barberos";
   var serviciosApi = "http://localhost:1337/api/productos";
-  var diayhorariosApi = "http://localhost:1337/api/dia-turnos?populate=*"
-  var horariosApi = "http://localhost:1337/api/horarios"
+  var diayhorariosApi = "http://localhost:1337/api/dia-turnos?populate=*";
+  var horariosApi = "http://localhost:1337/api/horarios";
 
   const [barberos, setBarbero] = useState([]);
   const [servicios, setServicio] = useState([]);
-  const [horarios2,setHorario2] = useState([]);
+  const [horarios2, setHorario2] = useState([]);
 
   const [horarioSeleccionado, setHorarioSeleccionado] = useState(0);
   const [barberoFiltrado, setBarberoFiltrado] = useState("");
@@ -68,8 +68,6 @@ const TablaTurnos = () => {
       });
   }, []);
 
-
-
   //llamar a la pi de servicios para que traiga los nombres de los servicios disponibles
   useEffect(() => {
     Axios.get(serviciosApi)
@@ -84,9 +82,7 @@ const TablaTurnos = () => {
       });
   }, []);
 
-
   //llamar a la api que me traiga los horarios
-
 
   return (
     <div className="container text-center mt-4 mb-4">
@@ -129,25 +125,7 @@ const TablaTurnos = () => {
       <hr />
       <h3>Seleccione fecha</h3>
 
-      <SelectorFecha/>
-      <hr/>
-
-
-
-      <div className="list-group">
-        {horarios.map((horario, index) => (
-          <button
-            key={index}
-            type="button"
-            className={`list-group-item list-group-item-action ${
-              index === horarioSeleccionado ? "list-group-item-secondary" : ""
-            }`}
-            onClick={() => handleHorarioClick(index)}
-          >
-            {horario}
-          </button>
-        ))}
-      </div>
+      <SelectorFecha />
 
       <div className="footer row d-flex mx-4 align-items-end mx-auto uppercase">
         <button type="button" className="mt-4 btn btn-danger mt-2 p-4 pb-10">
