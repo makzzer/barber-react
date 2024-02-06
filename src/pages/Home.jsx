@@ -17,7 +17,7 @@ const Home = () => {
           <div className="d-flex flex-column m-2 uppercase">
             <NavLink
               className="btn btn-dark  m-2 p-4 pb-10"
-              to="/reservarturnos2"
+              to="/reservarturnos"
             >
               Reservar Turno
             </NavLink>
